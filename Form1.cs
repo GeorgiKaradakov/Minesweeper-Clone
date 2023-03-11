@@ -7,7 +7,7 @@ namespace Minesweeper_clone
     {
         private const int ROWS = 17, COLS = 21;
 
-        private int seconds_played, flags_count = 50, bomb_count = 2/*(int)Math.Ceiling((ROWS * COLS) / 6.0)*/;
+        private int seconds_played, flags_count = 50, bomb_count = (int)Math.Ceiling((ROWS * COLS) / 6.0);
 
         private bool game_over = false, is_bg = false;
 

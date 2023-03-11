@@ -157,6 +157,7 @@
             this.btnENG.Size = new System.Drawing.Size(62, 48);
             this.btnENG.TabIndex = 5;
             this.btnENG.UseVisualStyleBackColor = true;
+            this.btnENG.Click += new System.EventHandler(this.btnENG_Click);
             // 
             // Form1
             // 

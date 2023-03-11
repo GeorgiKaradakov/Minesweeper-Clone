@@ -38,3 +38,5 @@ E:\School\Projects\Minesweeper\Minesweeper-Clone-main\obj\Debug\net6.0-windows\M
 E:\School\Projects\Minesweeper\Minesweeper-Clone-main\obj\Debug\net6.0-windows\Minesweeper-clone.genruntimeconfig.cache
 E:\School\Projects\Minesweeper\Minesweeper-Clone-main\obj\Debug\net6.0-windows\ref\Minesweeper-clone.dll
 E:\School\Projects\Minesweeper\Minesweeper-Clone-main\obj\Debug\net6.0-windows\Minesweeper_clone.DetailsForm.resources
+D:\HomeWork\Informatika\Projects\C#\school\Minesweeper-Clone\obj\Debug\net6.0-windows\Minesweeper_clone.ClosingForm.resources
+D:\HomeWork\Informatika\Projects\C#\school\Minesweeper-Clone\obj\Debug\net6.0-windows\Minesweeper_clone.DetailsForm.resources

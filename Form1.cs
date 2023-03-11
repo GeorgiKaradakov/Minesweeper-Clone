@@ -7,9 +7,9 @@ namespace Minesweeper_clone
     {
         private const int ROWS = 17, COLS = 21;
 
-        private int seconds_played, flags_count = 50, bomb_count = (int)Math.Ceiling((ROWS * COLS) / 6.0);
+        private int seconds_played, flags_count = 50, bomb_count = 2/*(int)Math.Ceiling((ROWS * COLS) / 6.0)*/;
 
-        private bool game_over = false;
+        private bool game_over = false, is_bg = false;
 
         private Box[,] boxes = new Box[ROWS, COLS];
 
@@ -85,9 +85,11 @@ namespace Minesweeper_clone
             reveal_all_empty_boxes(cur_x, cur_y, visited);
             if (Box.count_openned >= ROWS * COLS - bomb_count)
             {
-                Win winner = new Win();
+                Win winner = new Win(is_bg);
                 winner.Show();
                 game_over = true;
+                time_counter.Stop();
+                time_counter.Enabled = false;
             }
         }
 
@@ -122,7 +124,7 @@ namespace Minesweeper_clone
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            ClosingForm closingForm = new ClosingForm();
+            ClosingForm closingForm = new ClosingForm(is_bg);
             DialogResult result = closingForm.ShowDialog();
 
             if (result == DialogResult.Yes) 
@@ -135,7 +137,7 @@ namespace Minesweeper_clone
 
         private void btnDetails_Click(object sender, EventArgs e)
         {
-            DetailsForm detailsForm = new DetailsForm();
+            DetailsForm detailsForm = new DetailsForm(is_bg);
             DialogResult result = detailsForm.ShowDialog();
 
             if (result == DialogResult.OK)
@@ -147,30 +149,38 @@ namespace Minesweeper_clone
 
         private void btnBG_Click(object sender, EventArgs e)
         {
+            is_bg = true;
             // Main form
             btnNewGame.Text = "Нова Игра";
             btnDetails.Text = "Как се играе ?";
             btnExit.Text = "Изход";
 
             //Closing form
-            ClosingForm closingForm = new ClosingForm();
-
-            closingForm.lblQuestion.Text = "Искате ли да затворите това приложение?";
-            closingForm.btnYes.Text = "ДА";
-            closingForm.btnNo.Text = "НЕ";
+            ClosingForm closingForm = new ClosingForm(is_bg);
 
             // Win form
-            Win win = new Win();
-
-            win.button1.Text = "Затвори";
+            Win win = new Win(is_bg);
 
             //Details form
-            DetailsForm detailsForm = new DetailsForm();
+            DetailsForm detailsForm = new DetailsForm(is_bg);
+        }
 
-            detailsForm.lblInfo.Text = "Играте е проста. Натискаш на някое квадратче и " +
-                "числа се показват. Всяко число показва колко бомби са скрити около него. Вашата задача е " +
-                "да поставите 'флагче', там където си мислите, че има бомба. Ако сте прави, продължавате, " +
-                "а ако не, Вие губите и останалите бомби се показват.";
+        private void btnENG_Click(object sender, EventArgs e)
+        {
+            is_bg = false;
+            // Main form
+            btnNewGame.Text = "New Game";
+            btnDetails.Text = "How to play ?";
+            btnExit.Text = "Exit";
+
+            //Closing form
+            ClosingForm closingForm = new ClosingForm(is_bg);
+
+            // Win form
+            Win win = new Win(is_bg);
+
+            //Details form
+            DetailsForm detailsForm = new DetailsForm(is_bg);
         }
 
         private void btnNewGame_Click(object sender, EventArgs e)
@@ -192,6 +202,11 @@ namespace Minesweeper_clone
             flag_count.Text = "0" + flags_count.ToString();
             indecies_mine = generate_board(game_over);
             seconds_played = 0;
+            if (game_over)
+            {
+                time_counter.Enabled = true;
+                time_counter.Start();
+            }
             game_over = false;
         }
 

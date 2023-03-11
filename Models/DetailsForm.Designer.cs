@@ -37,9 +37,9 @@
             // 
             this.btnReturn.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnReturn.Font = new System.Drawing.Font("Baskerville Old Face", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnReturn.Location = new System.Drawing.Point(237, 219);
+            this.btnReturn.Location = new System.Drawing.Point(221, 219);
             this.btnReturn.Name = "btnReturn";
-            this.btnReturn.Size = new System.Drawing.Size(149, 58);
+            this.btnReturn.Size = new System.Drawing.Size(161, 62);
             this.btnReturn.TabIndex = 0;
             this.btnReturn.Text = "Return";
             this.btnReturn.UseVisualStyleBackColor = true;
@@ -47,11 +47,12 @@
             // lblInfo
             // 
             this.lblInfo.Font = new System.Drawing.Font("Baskerville Old Face", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblInfo.Location = new System.Drawing.Point(75, 54);
+            this.lblInfo.Location = new System.Drawing.Point(55, 9);
             this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(485, 162);
+            this.lblInfo.Size = new System.Drawing.Size(504, 207);
             this.lblInfo.TabIndex = 1;
             this.lblInfo.Text = resources.GetString("lblInfo.Text");
+            this.lblInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // DetailsForm
             // 
@@ -68,6 +69,7 @@
             this.Name = "DetailsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Info";
+            this.Load += new System.EventHandler(this.DetailsForm_Load);
             this.ResumeLayout(false);
 
         }

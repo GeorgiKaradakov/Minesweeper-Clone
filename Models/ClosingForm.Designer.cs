@@ -36,11 +36,10 @@
             // 
             // lblQuestion
             // 
-            this.lblQuestion.AutoSize = true;
             this.lblQuestion.Font = new System.Drawing.Font("Baskerville Old Face", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblQuestion.Location = new System.Drawing.Point(51, 62);
+            this.lblQuestion.Location = new System.Drawing.Point(21, 48);
             this.lblQuestion.Name = "lblQuestion";
-            this.lblQuestion.Size = new System.Drawing.Size(465, 27);
+            this.lblQuestion.Size = new System.Drawing.Size(512, 45);
             this.lblQuestion.TabIndex = 0;
             this.lblQuestion.Text = "Are you sure you want to close this application ?";
             this.lblQuestion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -85,7 +84,6 @@
             this.Text = "Exit ";
             this.Load += new System.EventHandler(this.ClosingForm_Load);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

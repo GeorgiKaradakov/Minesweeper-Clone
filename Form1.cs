@@ -33,30 +33,31 @@ namespace Minesweeper_clone
             reset_game_state();
         }
 
-        private void box_mouse_wheeled(object sender, EventArgs e)
-        {
-            if (game_over) return;
-
-            var box = (Box)sender;
-            if (box.is_flagged)
-            {
-                box.is_flagged = false;
-                box.Image = Properties.Resources.Unoppened;
-                flag_count.Text = $"0{++flags_count}";
-                return;
-            }
-
-            if (box.is_openned) return;
-            box.is_flagged = true;
-            box.Image = Properties.Resources.flag;
-            flag_count.Text = $"0{--flags_count}";
-        }
-
         private void box_clicked(object sender, EventArgs e)
         {
             var box = (Box)sender;
+            var me = (MouseEventArgs)e;
 
-            if (box.is_flagged || game_over) return;
+            if (game_over) return;
+
+            if(me.Button == MouseButtons.Right) {
+                if (box.is_openned) return;
+
+                if (box.is_flagged)
+                {
+                    box.is_flagged = false;
+                    box.Image = Properties.Resources.Unoppened;
+                    flag_count.Text = $"0{++flags_count}";
+                }
+                else
+                {
+                    box.is_flagged = true;
+                    box.Image = Properties.Resources.flag;
+                    flag_count.Text = $"0{--flags_count}";
+                }
+
+                return;
+            }
 
             if (box.is_mine)
             {
@@ -102,13 +103,13 @@ namespace Minesweeper_clone
         private void reveal_all_empty_boxes(int x, int y, bool[,] visited)
         {
             if (0 > x || x >= ROWS || 0 > y || y >= COLS) return;
+            if (boxes[x, y].is_mine || boxes[x, y].is_flagged || boxes[x, y].is_openned) return;
             if (boxes[x, y].mine_count > 0 && !boxes[x, y].is_openned)
             {
                 boxes[x, y].open_box();
                 return;
             }
             if (visited[x, y]) return;
-            if (boxes[x, y].is_mine || boxes[x, y].is_flagged || boxes[x, y].is_openned) return;
 
             boxes[x, y].open_box();
             visited[x, y] = true;
@@ -154,15 +155,6 @@ namespace Minesweeper_clone
             btnNewGame.Text = "Нова Игра";
             btnDetails.Text = "Как се играе ?";
             btnExit.Text = "Изход";
-
-            //Closing form
-            ClosingForm closingForm = new ClosingForm(is_bg);
-
-            // Win form
-            Win win = new Win(is_bg);
-
-            //Details form
-            DetailsForm detailsForm = new DetailsForm(is_bg);
         }
 
         private void btnENG_Click(object sender, EventArgs e)
@@ -172,15 +164,6 @@ namespace Minesweeper_clone
             btnNewGame.Text = "New Game";
             btnDetails.Text = "How to play ?";
             btnExit.Text = "Exit";
-
-            //Closing form
-            ClosingForm closingForm = new ClosingForm(is_bg);
-
-            // Win form
-            Win win = new Win(is_bg);
-
-            //Details form
-            DetailsForm detailsForm = new DetailsForm(is_bg);
         }
 
         private void btnNewGame_Click(object sender, EventArgs e)
@@ -252,8 +235,8 @@ namespace Minesweeper_clone
                     }
 
                     this.Controls.Add(boxes[x, y]);
-                    boxes[x, y].Click += new EventHandler(box_clicked);
-                    boxes[x, y].MouseWheel += new MouseEventHandler(box_mouse_wheeled);
+                    if(!not_first_generation)
+                        boxes[x, y].Click += new EventHandler(box_clicked);
                 }
             }
 
